@@ -1,0 +1,48 @@
+<div>
+    <h2>Login</h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="username"
+          required
+        />
+        <div
+          *ngIf="
+            loginForm.controls['username']?.invalid &&
+            (loginForm.controls['username']?.dirty ||
+              loginForm.controls['username']?.touched)
+          "
+          style="color: red"
+        >
+          Username is required.
+        </div>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />
+        <div
+          *ngIf="
+            loginForm.controls['password']?.invalid &&
+            (loginForm.controls['password']?.dirty ||
+              loginForm.controls['password']?.touched)
+          "
+          [ngClass]="{'error-message': loginForm.controls['password'].invalid}"
+        >
+          Password is required.
+        </div>
+      </div>
+      <button type="submit" (click)="displayValidationMessage()">Submit</button>
+    </form>
+    <div *ngIf="loginFailed">Please enter correct credentials!</div>
+  </div>
+  
